@@ -25,7 +25,10 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
-        
+        arch: x86_64
+        disable-animations: true
+        force-avd-creation: true
+        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
         script: |
           cd "mqa-homeworks/2.2 UI Automator/sample"
           chmod +x gradlew
