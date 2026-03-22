@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "mqa-homeworks/2.2 UI Automator/sample"
 
     steps:
     - uses: actions/checkout@v3
@@ -27,6 +30,10 @@ jobs:
       
   test:
     runs-on: macos-13
+    defaults:
+      run:
+        working-directory: "mqa-homeworks/2.2 UI Automator/sample"
+        
     steps:
     - uses: actions/checkout@v3
     - name: set up JDK 17
@@ -43,4 +50,5 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
+        working-directory: "mqa-homeworks/2.2 UI Automator/sample"
         script: ./gradlew connectedCheck
