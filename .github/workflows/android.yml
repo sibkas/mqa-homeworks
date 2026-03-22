@@ -7,35 +7,13 @@ on:
     branches: '*'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: "mqa-homeworks/2.2 UI Automator/sample"
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'adopt'
-        cache: gradle
-
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    
-    - name: Build with Gradle
-      run: ./gradlew build
-      
   test:
     runs-on: macos-13
-    defaults:
-      run:
-        working-directory: "mqa-homeworks/2.2 UI Automator/sample"
-        
+    
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
+
     - name: set up JDK 17
       uses: actions/setup-java@v3
       with:
@@ -43,12 +21,12 @@ jobs:
         distribution: 'adopt'
         cache: gradle
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-      
     - name: run tests
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
-        working-directory: "mqa-homeworks/2.2 UI Automator/sample"
-        script: ./gradlew connectedCheck
+        # Скрипт заходит в папку, дает права и запускает тесты в нужномй папке
+        script: |
+          cd "mqa-homeworks/2.2 UI Automator/sample"
+          chmod +x gradlew
+          ./gradlew connectedCheck
