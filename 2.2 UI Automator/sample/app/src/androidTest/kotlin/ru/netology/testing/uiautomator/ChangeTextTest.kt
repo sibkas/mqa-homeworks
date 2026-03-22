@@ -110,6 +110,41 @@ class ChangeTextTest {
         assertEquals(result, textToSet)
     }
 
+    @Test
+    fun testEmptyString() {
+        val packageName = MODEL_PACKAGE
+        waitForPackage(packageName)
+
+        // 1 Запоминаем текст, который был в начале
+        val initialText = device.findObject(By.res(packageName, "textToBeChanged")).text
+
+        // 2 Вводим пустую строку и нажимаем кнопку "Change Text"
+        device.findObject(By.res(packageName, "userInput")).text = ""
+        device.findObject(By.res(packageName, "buttonChange")).click()
+
+        // 3 Проверяем, что текст в TextView НЕ изменился
+        val result = device.findObject(By.res(packageName, "textToBeChanged")).text
+        assertEquals(initialText, result)
+    }
+
+    @Test
+    fun testOpenTextInNewActivity() {
+        val packageName = MODEL_PACKAGE
+        waitForPackage(packageName)
+
+        // 1 Вводим проверочную строку
+        device.findObject(By.res(packageName, "userInput")).text = textToSet
+
+        // 2 Нажимаем ВТОРУЮ кнопку (buttonActivity), которая открывает новый экран
+        device.findObject(By.res(packageName, "buttonActivity")).click()
+
+        // 3 Ждем появления элемента с ID "text" на новом экране
+        val textOnNewScreen = device.wait(Until.findObject(By.res(packageName, "text")), TIMEOUT)
+
+        // 4 Проверяем, что на втором экране отображается текст
+        assertEquals(textToSet, textOnNewScreen.text)
+    }
+
 }
 
 
