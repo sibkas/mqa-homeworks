@@ -24,11 +24,12 @@ jobs:
     - name: Run UI Automator tests
       uses: reactivecircus/android-emulator-runner@v2
       with:
-        api-level: 29
+        api-level: 30
         arch: x86_64
         disable-animations: true
         force-avd-creation: true
-        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+        
+        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -memory 2048
         script: |
           cd "mqa-homeworks/2.2 UI Automator/sample"
           chmod +x gradlew
