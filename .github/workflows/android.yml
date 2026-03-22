@@ -36,6 +36,7 @@ jobs:
         force-avd-creation: true
         emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
         script: |
-          cd "mqa-homeworks/2.2 UI Automator/sample"
+          
+          cd "2.2 UI Automator/sample"
           chmod +x gradlew
           ./gradlew connectedCheck
