@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.netology.qa.screens.MainScreen;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -23,7 +24,9 @@ public class AppiumAppTest {
         if ("android".equals(platform)) {
             caps.setCapability("platformName", "android");
             caps.setCapability("appium:deviceName", "Android Emulator");
-            caps.setCapability("appium:app", "E:\\studies\\androidAuto\\2.4 Appium\\sample\\app\\build\\outputs\\apk\\debug\\app-debug.apk");
+            File projectRoot = new File(System.getProperty("user.dir"));
+            File app = new File(projectRoot, "app/app-debug.apk");
+            caps.setCapability("appium:app", app.getAbsolutePath());
             caps.setCapability("appium:automationName", "UiAutomator2");
             caps.setCapability("appium:noSign", true);
         } else {
